@@ -1,5 +1,5 @@
 const config = {
-  plugins: ['@tailwindcss/postcss'],
+  '*': ['eslint --fix --no-warn-ignored'],
 };
 
 export default config;
