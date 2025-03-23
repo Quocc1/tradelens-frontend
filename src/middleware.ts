@@ -17,23 +17,41 @@ const isAuthPage = createRouteMatcher([
   '/:locale/sign-up(.*)',
 ]);
 
+const supportedLocales = ['en', 'vi'] as const;
+
 export default function middleware(
   request: NextRequest,
   event: NextFetchEvent,
 ) {
-  // Run Clerk middleware only when it's necessary
-  if (
-    isAuthPage(request) || isProtectedRoute(request)
-  ) {
+  const pathname = request.nextUrl.pathname;
+  const pathSegments = pathname.split('/').filter(Boolean);
+
+  // Handle root path '/' and locale paths
+  if (pathname === '/' || (pathSegments.length === 1 && /^\/[a-z]{2}$/.test(pathname))) {
+    const locale = pathname === '/' ? 'en' : pathname.slice(1); // Default to 'en' for root
+    const targetLocale = supportedLocales.includes(locale as any) ? locale : 'en';
+    const dashboardUrl = new URL(`/${targetLocale}/dashboard`, request.url);
+    return Response.redirect(dashboardUrl);
+  }
+
+  // Handle unsupported locales with dashboard (e.g., '/es/dashboard')
+  if (pathSegments.length >= 2) {
+    const attemptedLocale = pathSegments[0];
+    if (!supportedLocales.includes(attemptedLocale as any)) {
+      const dashboardUrl = new URL(`/en/${pathSegments.pop()}`, request.url);
+      return Response.redirect(dashboardUrl);
+    }
+  }
+
+  // Run Clerk middleware only when necessary
+  if (isAuthPage(request) || isProtectedRoute(request)) {
     return clerkMiddleware(async (auth, req) => {
       if (isProtectedRoute(req)) {
         const locale
           = req.nextUrl.pathname.match(/(\/.*)\/dashboard/)?.at(1) ?? '';
-
         const signInUrl = new URL(`${locale}/sign-in`, req.url);
 
         await auth.protect({
-          // `unauthenticatedUrl` is needed to avoid error: "Unable to find `next-intl` locale because the middleware didn't run on this request"
           unauthenticatedUrl: signInUrl.toString(),
         });
       }
@@ -47,9 +65,7 @@ export default function middleware(
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
     '/((?!_next|monitoring|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    // Always run for API routes
     '/(api|trpc)(.*)',
   ],
 };

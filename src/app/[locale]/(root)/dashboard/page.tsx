@@ -1,8 +1,10 @@
 import { getTranslations } from 'next-intl/server';
 
-export async function generateMetadata(props: {
+type IDashboardPageProps = {
   params: Promise<{ locale: string }>;
-}) {
+};
+
+export async function generateMetadata(props: IDashboardPageProps) {
   const { locale } = await props.params;
   const t = await getTranslations({
     locale,
