@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Quocc1/tradelens-frontend/compare/v1.0.0...v1.1.0) (2025-03-23)
+
+
+### Features
+
+* **auth:** add authentication ([5254a8d](https://github.com/Quocc1/tradelens-frontend/commit/5254a8d16561af1d3095ab05bed89df4cc5ea83c))
+
 # 1.0.0 (2025-03-21)
 
 
