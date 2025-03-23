@@ -3,6 +3,7 @@ import { routing } from '@/libs/i18n/routing';
 import { QueryClientProvider } from '@/providers/QueryClientProvider';
 import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
+import '@/styles/globals.css';
 
 export default async function LocaleLayout({
   children,
