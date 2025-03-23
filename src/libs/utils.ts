@@ -14,3 +14,11 @@ export const getI18nPath = (url: string, locale: string) => {
 
   return `/${locale}${url}`;
 };
+
+export const getCurrentDate = (locale: string) => {
+  return new Date().toLocaleDateString(locale, {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+};
