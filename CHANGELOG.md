@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/Quocc1/tradelens-frontend/compare/v1.1.0...v1.2.0) (2025-03-23)
+
+
+### Features
+
+* **auth/root:** add navbar, footer ([ae16d1a](https://github.com/Quocc1/tradelens-frontend/commit/ae16d1a2fc7e0974175e8549f140c804131aa997))
+
 # [1.1.0](https://github.com/Quocc1/tradelens-frontend/compare/v1.0.0...v1.1.0) (2025-03-23)
 
 
