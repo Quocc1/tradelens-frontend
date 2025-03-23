@@ -1,0 +1,18 @@
+{
+  "HomePage": {
+    "title": "Trang chủ",
+    "about": "Giới thiệu"
+  },
+  "Dashboard": {
+    "meta_title": "Trang chủ",
+    "meta_description": "Trang chủ"
+  },
+  "SignIn": {
+    "meta_title": "Đăng nhập",
+    "meta_description": "Đăng nhập"
+  },
+  "SignUp": {
+    "meta_title": "Đăng ký",
+    "meta_description": "Đăng ký"
+  }
+}

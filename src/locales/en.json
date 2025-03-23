@@ -2,5 +2,17 @@
   "HomePage": {
     "title": "Home Page",
     "about": "About"
+  },
+  "Dashboard": {
+    "meta_title": "Dashboard",
+    "meta_description": "Dashboard"
+  },
+  "SignIn": {
+    "meta_title": "Sign In",
+    "meta_description": "Sign In"
+  },
+  "SignUp": {
+    "meta_title": "Sign Up",
+    "meta_description": "Sign Up"
   }
 }
